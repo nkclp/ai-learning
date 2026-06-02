@@ -1,0 +1,24 @@
+# 第一个 API 调用程序
+import os
+from openai import OpenAI
+
+# 1. 把你的 API Key 填在这里（把 "这里填你的Key" 替换成刚才复制的那串）
+API_KEY = "这里填你的Key"
+
+# 2. 创建客户端
+client = OpenAI(
+    api_key=API_KEY,
+    base_url="https://api.deepseek.com"
+)
+
+# 3. 发送请求
+response = client.chat.completions.create(
+    model="deepseek-chat",
+    messages=[
+        {"role": "user", "content": "你好，请介绍一下你自己"}
+    ],
+    stream=False
+)
+
+# 4. 打印回复
+print(response.choices[0].message.content)
